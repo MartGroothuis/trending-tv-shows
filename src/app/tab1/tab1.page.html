@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab One
+      Tv Shows
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,23 +9,19 @@
 <ion-content>
   <ion-list lines="none">
     <ion-list-header>
-      <ion-label>Resources</ion-label>
+      <ion-label>trending tv shows</ion-label>
     </ion-list-header>
-    <ion-item href="https://ionicframework.com/docs/">
+    <ion-item ion-item *ngFor="let tvshow of tvshows.results" >
       <ion-icon slot="start" color="medium" name="book"></ion-icon>
-      <ion-label>Ionic Documentation</ion-label>
-    </ion-item>
-    <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-      <ion-icon slot="start" color="medium" name="build"></ion-icon>
-      <ion-label>Scaffold Out Your App</ion-label>
-    </ion-item>
-    <ion-item href="https://ionicframework.com/docs/layout/structure">
-      <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-      <ion-label>Change Your App Layout</ion-label>
-    </ion-item>
-    <ion-item href="https://ionicframework.com/docs/theming/basics">
-      <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-      <ion-label>Theme Your App</ion-label>
+      <ion-label>
+        <h2>{{tvshow.name}}</h2>
+
+        <div ion-item *ngFor="let genre of tvshow.genre_ids" >
+          <p>{{genre}}</p>
+        </div>
+
+      </ion-label>
+      
     </ion-item>
   </ion-list>
 </ion-content>
