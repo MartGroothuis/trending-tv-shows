@@ -1,52 +1,57 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { Storage } from '@ionic/storage';
-import { TmdbServiceService } from '../services/tmdb-service.service';
+import { Component } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
+import { Storage } from "@ionic/storage";
+import { TmdbServiceService } from "../services/tmdb-service.service";
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: "app-tab1",
+  templateUrl: "tab1.page.html",
+  styleUrls: ["tab1.page.scss"]
 })
 export class Tab1Page {
-
   public tvgenres: Observable<[]>;
   public tvshows: Observable<[]>;
 
-  constructor(private tmdbService: TmdbServiceService, private http: HttpClient, storage: Storage) { 
-
+  constructor(
+    private tmdbService: TmdbServiceService,
+    private http: HttpClient,
+    storage: Storage
+  ) {
     // get all of the genres of the tvshows
-    this.tmdbService.genres().subscribe((response: any) => {
-      // set tvgenres storage
-      storage.set('tvgenres', response.genres);
-      this.tvgenres = response.genres;
+    this.tmdbService.genres().subscribe(
+      (response: any) => {
+        // set tvgenres storage
+        storage.set("tvgenres", response.genres);
+        this.tvgenres = response.genres;
 
-      // get all of the trending tv shows of the week
-      this.tmdbService.trendingTvshows().subscribe((response: any) => {
-        // set this.tvshows 
-        this.tvshows = response.results;
+        // get all of the trending tv shows of the week
+        this.tmdbService.trendingTvshows().subscribe((response: any) => {
+          // set this.tvshows
+          this.tvshows = response.results;
 
-        // find the ganre that belongs to the tvshow
-        this.tvshows.map(tvshow => {
-          tvshow.genres = this.tvgenres.filter((genre) => {
-            return tvshow.genre_ids.includes(genre.id);
+          // find the ganre that belongs to the tvshow
+          this.tvshows.map(tvshow => {
+            tvshow.genres = this.tvgenres.filter(genre => {
+              return tvshow.genre_ids.includes(genre.id);
+            });
           });
+
+          // set tvshows storage
+          storage.set("tvshows", response.results);
+        });
+      },
+      e => {
+        // get the tvgenres out of storage
+        storage.get("tvgenres").then(tvgenres => {
+          this.tvgenres = tvgenres;
         });
 
-        // set tvshows storage
-        storage.set('tvshows', response.results);
-      });
-    }, e => {
-      // get the tvgenres out of storage
-      storage.get('tvgenres').then((tvgenres) => {
-        this.tvgenres = tvgenres;
-      });
-
-      // get the tvshows out of storage
-      storage.get('tvshows').then((tvshows) => {
-        this.tvshows = tvshows;
-      });
-    });
+        // get the tvshows out of storage
+        storage.get("tvshows").then(tvshows => {
+          this.tvshows = tvshows;
+        });
+      }
+    );
   }
 }
