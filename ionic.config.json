@@ -1,5 +1,7 @@
 {
   "name": "trending-tv-shows",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
