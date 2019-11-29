@@ -4,12 +4,17 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/css/ionic.bundle.css"/>
     <style>
-      
+      .thumbnail{
+        height: 80px;
+      }
       .genres{
         display: flex;
       }
       .genre{
         margin-right: 5px;
+      }
+      .overview{
+        width: 100%;
       }
     </style>
   </head>
@@ -27,8 +32,8 @@
       <ion-label><h1>Trending tv shows</h1></ion-label>
     </ion-list-header>
     <ion-item ion-item *ngFor="let tvshow of tvshows" >
-      <ion-thumbnail slot="start">
-        <ion-img [src]="'https://image.tmdb.org/t/p/w200/'+tvshow.poster_path"></ion-img>
+      <ion-thumbnail class="thumbnail" slot="start">
+        <ion-img class="thumbnail" [src]="'https://image.tmdb.org/t/p/w200/'+tvshow.poster_path"></ion-img>
       </ion-thumbnail>
       <ion-label>
         <h2>{{tvshow.name}}</h2>
@@ -38,6 +43,7 @@
             <ion-badge class="genre" color="dark">{{genre.name}}</ion-badge>
           </div>
         </div>
+        <p class="overview">{{tvshow.overview}}</p>
       </ion-label>
 
     </ion-item>
