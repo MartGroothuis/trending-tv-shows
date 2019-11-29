@@ -23,7 +23,7 @@ export class Tab1Page {
       this.tmdbService.trendingTvshows().subscribe((response: any) => {
 
         this.tvshows = response.results;
-
+        console.log(this.tvshows);
         // find the ganre that belongs to the tvshow
         this.tvshows.map(tvshow => {
           tvshow.genres = this.tvgenres.filter((genre) => {
