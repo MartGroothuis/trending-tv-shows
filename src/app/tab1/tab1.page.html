@@ -1,22 +1,3 @@
-<head>
-
-    <title>List</title>
-
-    <style>
-      .thumbnail{
-        height: 80px;
-      }
-      .genres{
-        display: flex;
-      }
-      .genre{
-        margin-right: 5px;
-      }
-      .overview{
-        width: 100%;
-      }
-    </style>
-  </head>
 <ion-header>
   <ion-toolbar>
     <ion-title>
@@ -36,7 +17,9 @@
       </ion-thumbnail>
       <ion-label>
         <h2>{{tvshow.name}}</h2>
-        <h4>Release on: {{tvshow.first_air_date}}</h4>
+        <ion-text color="medium">
+          <h4 >Release on: {{tvshow.first_air_date}}</h4>
+        </ion-text>
         <div class="genres">
           <div ion-item *ngFor="let genre of tvshow.genres" >
             <ion-badge class="genre" color="dark">{{genre.name}}</ion-badge>
