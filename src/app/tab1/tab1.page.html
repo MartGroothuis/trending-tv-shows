@@ -1,3 +1,18 @@
+<head>
+
+    <title>List</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/css/ionic.bundle.css"/>
+    <style>
+      
+      .genres{
+        display: flex;
+      }
+      .genre{
+        margin-right: 5px;
+      }
+    </style>
+  </head>
 <ion-header>
   <ion-toolbar>
     <ion-title>
@@ -9,19 +24,22 @@
 <ion-content>
   <ion-list lines="none">
     <ion-list-header>
-      <ion-label>trending tv shows</ion-label>
+      <ion-label><h1>Trending tv shows</h1></ion-label>
     </ion-list-header>
     <ion-item ion-item *ngFor="let tvshow of tvshows" >
-      <ion-icon slot="start" color="medium" name="book"></ion-icon>
+      <ion-thumbnail slot="start">
+        <ion-img [src]="'https://image.tmdb.org/t/p/w200/'+tvshow.poster_path"></ion-img>
+      </ion-thumbnail>
       <ion-label>
         <h2>{{tvshow.name}}</h2>
-
-        <div ion-item *ngFor="let genre of tvshow.genres" >
-          <p>{{genre.name}}</p>
+        <h4>Release on: {{tvshow.first_air_date}}</h4>
+        <div class="genres">
+          <div ion-item *ngFor="let genre of tvshow.genres" >
+            <ion-badge class="genre" color="dark">{{genre.name}}</ion-badge>
+          </div>
         </div>
-
       </ion-label>
-      
+
     </ion-item>
   </ion-list>
 </ion-content>
